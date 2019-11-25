@@ -19,15 +19,19 @@ module.exports = {
       return res.status(400).json({ mensagem: 'Dados Inválidos' });
     }
 
-   const user =  await User.findOne({ email: req.body.email });
+  let user =  await User.findOne({ email: req.body.email });
+   await User.updateOne(user, { dataUltimoLogin: Date.now() });
+   await user.save();
 
-   const { id, nome, email } = user;
+   user  =  await User.findOne({ email: req.body.email });
+   const { id, nome, email, dataUltimoLogin } = user;
 
     return res.json({
       user: {
         id,
         nome,
-        email
+        email,
+        dataUltimoLogin
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,

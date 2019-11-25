@@ -27,9 +27,17 @@ const UserSchema = new mongoose.Schema({
       required: true
     }
   }],
-  createdAt: {
+  dataCriacao: {
     type: Date,
     default: Date.now
+  },
+  dataAlteracao: {
+    type: Date,
+    default: Date.now
+  },
+  dataUltimoLogin: {
+    type: Date,
+    default: null
   }
 
 });
