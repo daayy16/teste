@@ -5,8 +5,9 @@ const User = mongoose.model('User');
 
 module.exports = {
   async index(req, res) {
-    const usuarios = await User.find();
-    return res.json(usuarios);
+    const { id } = req.params;
+    const usuario = await User.findById(id);
+    return res.json(usuario);
   },
 
   async store(req, res) {
@@ -32,10 +33,10 @@ module.exports = {
     if (userExists) {
       return res.status(400).json({ mensagem: 'Usuário já cadastrado.' });
     }
-    
+
     const usuarios = await User.create(req.body);
     return res.json(usuarios);
-    
+
   }
- 
+
 };

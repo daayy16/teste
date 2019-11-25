@@ -41,7 +41,7 @@ async function checkPassword(req, res, next) {
 
 
 //criando primeira rota
-routes.get('/usuarios', authCheck, UserController.index);
+routes.get('/usuarios/:id', authCheck, UserController.index);
 routes.post('/usuarios', UserController.store);
 routes.post('/login', checkPassword, LoginController.store);
 
